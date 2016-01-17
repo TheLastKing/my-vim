@@ -1,43 +1,138 @@
-let g:session_autosave = 'yes'
-let g:session_autoload = 'yes'
-syntax on
-colorscheme mustang 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                    ===== MY.VIMRC ===== 
+" 
+" Maintainer: 
+"      Bui-Khanh Hoang 
+"
+" Reference:
+"      https://github.com/amix/vimrc/blob/master/vimrcs/basic.vim
+"      http://vim.wikia.com/wiki
+"      googling && stackoverflow
+"
+" Sections:
+"    - General
+"    - VIM user interface
+"    - Plugin management with vundle
+"    - Plugin configurations
+"       + nerdtree 
+"       + vim-session
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Faster jumping to normal mode - using jk combination in place of ESC key  
+imap jk <Esc>
+
+" Set leader key as <space>
+let mapleader="\<Space>"
+
+" Ignore case when searching
+set ignorecase
+
+" Turn case-sensitive search on whenever a capital letter appears in keyword
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Toggle search highligting 
+nnoremap <F4> :set hlsearch!<CR>
+
+" Showing the matches while typing the pattern
+set incsearch 
+
+" Showing matching brackets
+set showmatch
+
+" Add a bit extra margin to the left
+set foldcolumn=1
+
+" Allow mouse to function in vim
+set mouse=a
+
+" Make ctrl-v and ctrl-p behave normally as in a typical editor 
+behave mswin
+set clipboard=unnamedplus
+smap <Del> <C-g>"_d
+smap <C-c> <C-g>y
+smap <C-x> <C-g>x
+imap <C-v> <Esc>pi
+smap <C-v> <C-g>p
+smap <Tab> <C-g>1> 
+smap <S-Tab> <C-g>1<
+
+" Turning off list
+set nolist
+
+" Turning on list
+" set list
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Set dark background for all colorscheme
 set background=dark
+
+" Making terminal vim have the same colorscheme as in gvim
 set t_Co=256
 
-:imap jk <Esc>
-let mapleader="\<Space>"
+" Different color modes for terminal vim and gvim respectively
 if !has('gui_running') 
-  " GUI colors
-  colorscheme monokai-chris  
-else 
   " Non-Gui (terminal) colors
+  " colorscheme mustang 
+  " colorscheme railcasts
+  " colorscheme monokai-chris 
+  " colorscheme 256-jungle 
+  " colorscheme railscasts
+  colorscheme Tomorrow-Night
+  " colorscheme distinguished
+  " colorscheme jellybeans 
+else 
+  " GUI colors
   colorscheme twilight 
 endif
 
-" Highlighting over80 line
-" :set colorcolumn=80
-:set guioptions-=m  "remove menu bar
-:set guioptions-=T  "remove toolbar
-:set guioptions-=r  "remove right-hand scroll bar
-:set guioptions-=L  "remove left-hand scroll bar
+" Remove menu bar
+set guioptions-=m
 
+" Remove toolbar
+set guioptions-=T
+
+" Remove right-hand scroll bar
+set guioptions-=r
+
+" Remove left-hand scroll bar
+set guioptions-=L
+
+
+" Set relative number
+:set relativenumber
+
+" Turn on syntax checking
+syntax on
+
+" Set two spaces indentation
 set expandtab
 set shiftwidth=2
 set softtabstop=2
 
-set number
+" Highlighting over-80 line
+set colorcolumn=80
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin management with vundle
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ????  Find it yourself
+set nocompatible
+filetype off
 
-" set the runtime path to include Vundle and initialize
+" Set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'The-NERD-tree'
 Plugin 'EasyMotion'
@@ -53,70 +148,40 @@ Plugin 'vim-misc'
 Plugin 'vim-session'
 Plugin 'vim-flake8'
 Plugin 'ctrlp.vim'
-" Plugin 'jedi-vim'
-"################################################ Start
 Plugin 'tComment'
-" gc{motion}   :: Toggle comments (for small comments within one line 
-"                 the &filetype_inline style will be used, if 
-"                 defined) 
-" gcc          :: Toggle comment for the current line 
-" gC{motion}   :: Comment region 
-" gCc          :: Comment the current line 
-"################################################ End
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+call vundle#end() 
+filetype plugin indent on
 
-" Map nerdtree toggle shortcut
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins configurations
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" -----------------------------------------------------------------------------
+" + NERDTREE
+" -----------------------------------------------------------------------------
+
+" Set nerdtree menu to the right
+let g:NERDTreeWinPos = "right"
+
+" Map nerdtree toggle shortcuts
 silent! nmap <F2> :NERDTreeToggle<CR>
 silent! map <F3> :NERDTreeFind<CR>
-
 let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
 
-"copy to 'clipboard registry'
-:behave mswin
-:set clipboard=unnamedplus
-:smap <Del> <C-g>"_d
-:smap <C-c> <C-g>y
-:smap <C-x> <C-g>x
-:imap <C-v> <Esc>pi
-:smap <C-v> <C-g>p
-:smap <Tab> <C-g>1> 
-:smap <S-Tab> <C-g>1<
+" -----------------------------------------------------------------------------
+" + VIM-SESSION 
+" -----------------------------------------------------------------------------
 
-" Number and relative number way of numbering line 
-:set relativenumber
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-
-nnoremap <C-n> :call NumberToggle()<cr>
-
-:set ignorecase
-:set smartcase
-
-" " Hightlight tab characters
-" :set list
+" Make vim-session remember its window's last position
 set sessionoptions+=resize,winpos
-let g:NERDTreeWinPos = "right"
 
-" Allow mouse to function in vim
-set mouse=a
+" Make vim-session auto save its state on window close
+let g:session_autosave = 'yes'
+
+" Make vim-session auto autoload its last session 
+let g:session_autoload = 'yes'
 
