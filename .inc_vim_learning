@@ -1,0 +1,49 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                     INCREMENTAL VIM LEARNING
+"
+" Vim-Learner: Bui-Khanh Hoang
+"
+" Sections:
+"    - Learning advices
+"    - My vim cheatsheet
+"    - My common mistakes
+"    - An irrelavant section
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Learning advices
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+A Summary from [ https://www.youtube.com/watch?v=ke7SfUFvvxo ]
+
+1. Learn to use vim help
+  - Spend a few minitues a day in vim help.
+
+2. Keep a cheetsheet
+  - 7 to 10 commands on your cheetsheet. 
+  - Be aware of these commands' existence and opportunities you can use them.
+
+3. Keep track of your common mistakes
+
+4. Learn all single letter commands
+   [ http://hea-www.harvard.edu/~fine/Tech/vi.html ]
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" My vim cheetsheet 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+1. Shift N to search in the "opposite" direction.
+2. \w to open a url link on browser from vim. [due to my vimrc config]
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" My common mistakes 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+1. Repeatedly did "shift :w enter" after each edition
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" An irrelavant section
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" How to create a symbolic link
+ln -s ~/.vimrc ~/.vim/.vimrc 
+ln -s ~/.inc_vim_learning ~/.vim/.inc_vim_learning
+
