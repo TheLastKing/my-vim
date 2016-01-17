@@ -120,9 +120,11 @@ set guioptions-=r
 " Remove left-hand scroll bar
 set guioptions-=L
 
-
 " Set relative number
 set relativenumber
+
+" Relative but still display actual current number line
+set number
 
 " Turn on syntax checking
 syntax on
@@ -133,10 +135,10 @@ set shiftwidth=2
 set softtabstop=2
 
 "Auto indent
-set ai 
+set ai
 
 "Smart indent
-set si 
+set si
 
  "Wrap lines
 set wrap
