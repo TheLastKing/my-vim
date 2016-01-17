@@ -12,10 +12,16 @@
 " Sections:
 "    - General
 "    - VIM user interface
+"    - Custom utilities
 "    - Plugin management with vundle
 "    - Plugin configurations
 "       + nerdtree 
 "       + vim-session
+"
+" Convention note:
+"    - Make sure url links stand clear from other irrelavant texts so that
+"    - those links can be brought up in a browser from the current termnial 
+"      with \w command utility [ specified in custom utilities section ]
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -124,6 +130,28 @@ set softtabstop=2
 set colorcolumn=80
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Custom Utilities 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Open a web-browser with the URL in the current line 
+" http://vim.wikia.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
+function! Browser ()
+  let line0 = getline (".")
+  let line = matchstr (line0, "http[^ ]*")
+  :if line==""
+  let line = matchstr (line0, "ftp[^ ]*")
+  :endif
+  :if line==""
+  let line = matchstr (line0, "file[^ ]*")
+  :endif
+  let line = escape (line, "#?&;|%")
+  :if line==""
+  let line = "\"" . (expand("%:p")) . "\""
+  :endif
+  exec ':silent !firefox ' . line
+endfunction
+map \w :call Browser ()<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin management with vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ????  Find it yourself
@@ -154,7 +182,6 @@ Plugin 'tComment'
 call vundle#end() 
 filetype plugin indent on
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins configurations
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -184,4 +211,3 @@ let g:session_autosave = 'yes'
 
 " Make vim-session auto autoload its last session 
 let g:session_autoload = 'yes'
-
