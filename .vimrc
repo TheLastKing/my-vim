@@ -48,6 +48,10 @@ set hlsearch
 " Toggle search highligting
 nnoremap <F4> :set hlsearch!<CR>
 
+" Disable highlight when <leader><cr> is pressed
+" NOTE: <cr> == <enter>
+map <silent> <leader><cr> :noh<cr>
+
 " Showing the matches while typing the pattern
 set incsearch
 
@@ -76,6 +80,7 @@ set nolist
 
 " Turning on list with customized special charactedr
 :set list listchars=tab:»·,eol:¬
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM user interface
@@ -117,7 +122,7 @@ set guioptions-=L
 
 
 " Set relative number
-:set relativenumber
+set relativenumber
 
 " Turn on syntax checking
 syntax on
@@ -127,8 +132,21 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 
+"Auto indent
+set ai 
+
+"Smart indent
+set si 
+
+ "Wrap lines
+set wrap
+
 " Highlighting over-80 line
 set colorcolumn=80
+
+" Treat long lines as break lines (useful when moving around in them)
+map j gj
+map k gk
 
 " eof - end of section mark for convenient jump "
 
@@ -164,6 +182,25 @@ map \w :call Browser ()<CR>
 
 " http://vi.stackexchange.com/questions/454/whats-the-simplest-way-to-strip-trailing-whitespace-from-all-lines-in-a-file
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" -----------------------------------------------------------------------------
+" + Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+" -----------------------------------------------------------------------------
+nnoremap <C-j> :<C-u>silent! move+<CR>==
+nnoremap <C-k> :<C-u>silent! move-2<CR>==
+xnoremap <C-k> :<C-u>silent! '<,'>move-2<CR>gv=gv
+xnoremap <C-j> :<C-u>silent! '<,'>move'>+<CR>gv=gv
+
+" -----------------------------------------------------------------------------
+" + Delete trailing white space on save, useful for Python and CoffeeScript ;)
+" -----------------------------------------------------------------------------
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 " eof - end of section mark for convenient jump "
 

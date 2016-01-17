@@ -20,7 +20,7 @@ A Summary from [ https://www.youtube.com/watch?v=ke7SfUFvvxo ]
   - Spend a few minitues a day in vim help.
 
 2. Keep a cheetsheet
-  - 7 to 10 commands on your cheetsheet. 
+  - 7 to 10 commands on your cheetsheet.
   - Be aware of these commands' existence and opportunities you can use them.
 
 3. Keep track of your common mistakes
@@ -29,13 +29,26 @@ A Summary from [ https://www.youtube.com/watch?v=ke7SfUFvvxo ]
    [ http://hea-www.harvard.edu/~fine/Tech/vi.html ]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" My vim cheetsheet 
+" My vim cheetsheet
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Command due to vimrc configuration.
+1. \w : open a url link on browser from vim.
+
+2. <F5> : trim off all trailing whitespace characters of every line.
+
+3. <leader><cr> : turn off search highlighting for current search only
+
+4. <F4> : toggle search highlighting for the whole session.
+
+5. Ctrl j : Move a line or the selected text under the cursor down
+   Ctrl k : Move a line or the selected text under the cursor up
+
+" Built-in Commands
 1. Shift N to search in the "opposite" direction.
-2. \w to open a url link on browser from vim. [due to my vimrc config]
+2. `. will take you to the last change you made.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" My common mistakes 
+" My common mistakes
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 1. Repeatedly did "shift :w enter" after each edition
 
@@ -44,6 +57,6 @@ A Summary from [ https://www.youtube.com/watch?v=ke7SfUFvvxo ]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " How to create a symbolic link
-ln -s ~/.vimrc ~/.vim/.vimrc 
+ln -s ~/.vimrc ~/.vim/.vimrc
 ln -s ~/.inc_vim_learning ~/.vim/.inc_vim_learning
 
