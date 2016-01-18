@@ -59,7 +59,7 @@ set incsearch
 set showmatch
 
 " Add a bit extra margin to the left
-set foldcolumn=1
+set foldcolumn=0
 
 " Allow mouse to function in vim
 set mouse=a
@@ -79,8 +79,7 @@ smap <S-Tab> <C-g>1<
 set nolist
 
 " Turning on list with customized special charactedr
-:set list listchars=tab:»·,eol:¬
-
+" set list listchars=tab:»·,eol:¬
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM user interface
@@ -137,10 +136,10 @@ set softtabstop=2
 "Auto indent
 set ai
 
-"Smart indent
-set si
+" "Smart indent
+" set si
 
- "Wrap lines
+"Wrap lines
 set wrap
 
 " Highlighting over-80 line
@@ -149,6 +148,10 @@ set colorcolumn=80
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
 
 " eof - end of section mark for convenient jump "
 
@@ -204,6 +207,13 @@ endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
+" -----------------------------------------------------------------------------
+" + Open the last closed split with Ctrl+t
+" -----------------------------------------------------------------------------
+
+"http://stackoverflow.com/questions/8184001/vim-reopen-last-closed-window-that-was-in-split
+nmap <c-t> :vs<bar>:b#<CR>
+
 " eof - end of section mark for convenient jump "
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -219,7 +229,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'The-NERD-tree'
 Plugin 'EasyMotion'
-Plugin 'Syntastic'
+" Plugin 'Syntastic'
 Plugin 'closetag.vim'
 Plugin 'xmledit'
 Plugin 'Filesearch'
