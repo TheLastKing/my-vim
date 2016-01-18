@@ -28,8 +28,10 @@ A Summary from [ https://www.youtube.com/watch?v=ke7SfUFvvxo ]
 4. Learn all single letter commands
    [ http://hea-www.harvard.edu/~fine/Tech/vi.html ]
 
+""" eof - marks the end of this section. 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" My vim cheetsheet
+" My vim cheatsheet
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Command due to vimrc configuration.
 1. \w : open a url link on browser from vim.
@@ -44,13 +46,34 @@ A Summary from [ https://www.youtube.com/watch?v=ke7SfUFvvxo ]
    Ctrl k : Move a line or the selected text under the cursor up
 
 " Built-in Commands
-1. Shift N to search in the "opposite" direction.
-2. `. will take you to the last change you made.
+1. Shift N : search in the "opposite" direction.
+2. `. : take you to the last change you made.
+3. U : Uppercase the visually-selected text
+4. u : Lowercase the visually-selected text
+5. guu: Change the current line to lowercase (same as Vu)
+6. gUU: Change the current line to uppercase (same as Vu)
+7. Ctrl-w H : Horizontal layout to vertical layout.
+8. Ctrl-w J : Vertical layout to horizontal layout.
+9. Ctrl-w r : SWap two buffers.
+10. Ctrl-w w : move cursors between two buffers.
+11. Ctrl-t : Bring back the last closed split.
+
+""" eof - marks the end of this section. 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " My common mistakes
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 1. Repeatedly did "shift :w enter" after each edition
+2. Frequently made typo mistakes because of focusing on typing speeed. 
+3. Frequently used backspace instead of ctrl+h.
+4. Frequently used jk+o to to go to newline from the end of the current line 
+   instead of using ctrl+j.
+5. Frequently used Ctrl-w Ctrl-w while Ctrl-w w does the job as well but
+   more efficient.
+6. Frequently replace the single letter under the cursor with s+<desired-ltter>
+   +jk instead of using r<desired-ltter>
+
+""" eof - marks the end of this section. 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " An irrelavant section
