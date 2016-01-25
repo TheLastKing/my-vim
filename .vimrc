@@ -136,8 +136,8 @@ set softtabstop=2
 "Auto indent
 set ai
 
-" "Smart indent
-" set si
+"Smart indent
+set si
 
 "Wrap lines
 set wrap
@@ -265,6 +265,9 @@ silent! nmap <F2> :NERDTreeToggle<CR>
 silent! map <F3> :NERDTreeFind<CR>
 let g:NERDTreeMapActivateNode="<F3>"
 let g:NERDTreeMapPreview="<F4>"
+
+" Open NerdTree with respect to current opened file
+map <leader>r :NERDTreeFind<cr> 
 
 " eof - end of section mark for convenient jump "
 
