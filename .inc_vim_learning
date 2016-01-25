@@ -44,6 +44,7 @@ A Summary from [ https://www.youtube.com/watch?v=ke7SfUFvvxo ]
 
 5. Ctrl j : Move a line or the selected text under the cursor down
    Ctrl k : Move a line or the selected text under the cursor up
+6. <Leader>r : Open NerdTree with respect to current opened file
 
 " Built-in Commands
 1. Shift N : search in the "opposite" direction.
