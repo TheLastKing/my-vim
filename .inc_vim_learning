@@ -58,6 +58,8 @@ A Summary from [ https://www.youtube.com/watch?v=ke7SfUFvvxo ]
 9. Ctrl-w r : SWap two buffers.
 10. Ctrl-w w : move cursors between two buffers.
 11. Ctrl-t : Bring back the last closed split.
+12. :bnext : next open buffer
+13. :bprev : prev open buffer
 
 """ eof - marks the end of this section. 
 
@@ -73,7 +75,6 @@ A Summary from [ https://www.youtube.com/watch?v=ke7SfUFvvxo ]
    more efficient.
 6. Frequently replace the single letter under the cursor with s+<desired-ltter>
    +jk instead of using r<desired-ltter>
-
 """ eof - marks the end of this section. 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

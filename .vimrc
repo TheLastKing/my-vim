@@ -13,8 +13,8 @@
 "    - General
 "    - VIM user interface
 "    - Custom utilities
-"    - Plugin management with vundle
-"    - Plugin configurations
+"    - Pllugin management with vundle
+"    - Pllugin configurations
 "       + nerdtree
 "       + vim-session
 "
@@ -29,7 +29,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Faster jumping to normal mode - using jk combination in place of ESC key
 imap jk <Esc>
 
@@ -85,6 +84,9 @@ set nolist
 " VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" " Set tab title current file name
+" set guitablabel=%t
+"
 " Set dark background for all colorscheme
 set background=dark
 
@@ -94,7 +96,17 @@ set t_Co=256
 " Different color modes for terminal vim and gvim respectively
 if !has('gui_running')
   " Non-Gui (terminal) colors
-  " colorscheme mustang
+  colorscheme mustang
+  " colorscheme railcasts
+  " colorscheme monokai-chris
+  " colorscheme 256-jungle
+  " colorscheme railscasts
+  " colorscheme Tomorrow-Night
+  " colorscheme distinguished
+  " colorscheme jellybeans
+else
+  " GUI colors
+  " colorscheme solarized 
   " colorscheme railcasts
   " colorscheme monokai-chris
   " colorscheme 256-jungle
@@ -102,9 +114,6 @@ if !has('gui_running')
   colorscheme Tomorrow-Night
   " colorscheme distinguished
   " colorscheme jellybeans
-else
-  " GUI colors
-  colorscheme twilight
 endif
 
 " Remove menu bar
@@ -133,8 +142,8 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 
-"Auto indent
 set ai
+"Auto indent
 
 "Smart indent
 set si
@@ -152,6 +161,23 @@ map k gk
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
+
+if has("autocmd")
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
+  au InsertEnter,InsertChange *
+        \ if v:insertmode == 'i' | 
+        \   silent execute '!echo -ne "\e[6 q"' | redraw! |
+        \ elseif v:insertmode == 'r' |
+        \   silent execute '!echo -ne "\e[4 q"' | redraw! |
+        \ endif
+  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+endif
+
+" Change cursor shape between insert and normal mode in iTerm2.app
+if $TERM_PROGRAM =~ "iTerm"
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+endif
 
 " eof - end of section mark for convenient jump "
 
@@ -192,8 +218,8 @@ nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 " + Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
 " -----------------------------------------------------------------------------
 nnoremap <C-j> :<C-u>silent! move+<CR>==
-nnoremap <C-k> :<C-u>silent! move-2<CR>==
-xnoremap <C-k> :<C-u>silent! '<,'>move-2<CR>gv=gv
+" xnoremap <C-k> :<C-u>silent! '<,'>move-2<CR>gv=gv
+" nnoremap <C-k> :<C-u>silent! move-2<CR>==
 xnoremap <C-j> :<C-u>silent! '<,'>move'>+<CR>gv=gv
 
 " -----------------------------------------------------------------------------
@@ -229,7 +255,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'The-NERD-tree'
 Plugin 'EasyMotion'
-" Plugin 'Syntastic'
+Plugin 'Syntastic'
 Plugin 'closetag.vim'
 Plugin 'xmledit'
 Plugin 'Filesearch'
@@ -242,17 +268,136 @@ Plugin 'vim-session'
 Plugin 'vim-flake8'
 Plugin 'ctrlp.vim'
 Plugin 'tComment'
-
+Plugin 'surround.vim'
+Plugin 'html-xml-tag-matcher'
+Plugin 'MatchTagAlways'
+Plugin 'neocomplete.vim'
+Plugin 'neosnippet.vim'
+Plugin 'neosnippet-snippets'
+Plugin 'vim-fugitive'
+Plugin 'vim-bookmarks'
+Plugin 'ack.vim'
+Plugin 'delimitMate.vim'
+Plugin 'SearchComplete'
+Plugin 'CSApprox'
+" Plugin 'YouCompleteMe'
+" eof - end of section mark for convenient jump "
 " All of your Plugins must be added before the following line
 call vundle#end()
 filetype plugin indent on
 
-" eof - end of section mark for convenient jump "
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin configurations
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" -----------------------------------------------------------------------------
+" + YouCompleteMe 
+" -----------------------------------------------------------------------------
+" let g:ycm_seed_identifiers_with_syntax=1
+" let g:ycm_global_ycm_extra_conf = '/home/li/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
+" let g:ycm_confirm_extra_conf=0
+" let g:ycm_collect_identifiers_from_tag_files = 1
+" let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" set completeopt=longest,menu
 
+" -----------------------------------------------------------------------------
+" + neocomplete.vim 
+" -----------------------------------------------------------------------------
+" Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+" eof - end of section mark for convenient jump "
+" -----------------------------------------------------------------------------
+" + neosnippet 
+" -----------------------------------------------------------------------------
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+" eof - end of section mark for convenient jump "
 " -----------------------------------------------------------------------------
 " + NERDTREE
 " -----------------------------------------------------------------------------
@@ -284,4 +429,13 @@ let g:session_autosave = 'yes'
 " Make vim-session auto autoload its last session
 let g:session_autoload = 'yes'
 
+" eof - end of section mark for convenient jump "
+" -----------------------------------------------------------------------------
+" + NERDTREE
+" -----------------------------------------------------------------------------
+" let g:bookmark_auto_save_file = '/bookmarks'
+" highlight BookmarkSign ctermbg=NONE ctermfg=160
+" highlight BookmarkLine ctermbg=194 ctermfg=NONE
+" let g:bookmark_sign = '♥'
+" let g:bookmark_highlight_lines = 1
 " eof - end of section mark for convenient jump "
